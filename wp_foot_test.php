@@ -18,7 +18,7 @@ function my_plugin_menu() {
 }
 
 /** Step 2 (from text above). */
-add_action( 'admin_menu', 'my_plugin_menu' );
+add_action( 'network_admin_menu', 'my_plugin_menu' );
 
 /** Step 3. */
 function my_plugin_options() {
