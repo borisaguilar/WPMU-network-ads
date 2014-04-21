@@ -17,7 +17,7 @@ adsense code accordingly. Enjoy :)
 ##Author
 
 Boris Aramis Aguilar Rodriguez 
-me <at> borisaguilar.com
+`me <at> borisaguilar.com`
 
 ## License
 
