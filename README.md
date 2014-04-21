@@ -1,12 +1,14 @@
 WPMU-network-ads
 ================
 
-Multisite Plugin, display ads code on every site on your network.
+Wordpress Multisite Plugin, display ads code on every site on your network.
 
 ## Installation and Usage
 
-V0.0.1: Place the file in mu-plugins directory of your wpmu. Edit 
-adsense code accordingly. Enjoy :)
+### V0.0.1: 
+- Place the file in mu-plugins directory of your wpmu. 
+- Edit adsense code accordingly. 
+- Enjoy :)
 
 ## Future Features
 
@@ -16,8 +18,7 @@ adsense code accordingly. Enjoy :)
 
 ##Author
 
-Boris Aramis Aguilar Rodriguez 
-`me <at> borisaguilar.com`
+Boris Aramis Aguilar Rodriguez - `me <at> borisaguilar.com`
 
 ## License
 
