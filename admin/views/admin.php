@@ -17,6 +17,7 @@
 
 	<?php screen_icon(); ?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+	<textarea rows=4 cols=2></textarea>
 
 	<!-- TODO: Provide markup for your options page here. -->
 
