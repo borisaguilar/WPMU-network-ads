@@ -15,7 +15,7 @@
  * Plugin Name:       WPMU Network Ads
  * Plugin URI:        https://github.com/boriscougar/WPMU-network-ads.git
  * Description:       Plugin to display Ads network-wide
- * Version:           0.0.7
+ * Version:           0.0.8
  * Author:            Boris Aguilar
  * Author URI:        http://borisaguilar.com
  * Text Domain:       WPMU-network-ads
