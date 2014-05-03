@@ -17,7 +17,10 @@
 
 	<?php screen_icon(); ?>
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-	<textarea rows=4 cols=2></textarea>
+	<form action="wp-admin/network/edit.php?action=wpmu_network_ads_snippet">
+	      <label for="snippet-code">Snippet Code to use:</label>
+	      <textarea name="snippet-code" rows=4 cols=2></textarea>
+	</form>
 
 	<!-- TODO: Provide markup for your options page here. -->
 

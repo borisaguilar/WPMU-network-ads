@@ -72,7 +72,8 @@ class WPMUNetworkAds_Admin {
 		 * Read more about actions and filters:
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( 'TODO', array( $this, 'action_method_name' ) );
+		add_action( 'network_admin_edit_wpmu_network_ads_snippet', array( $this, 'save_wpmu_network_ads_snippet' ) );
+		add_site_option('wpmu_network_snippet', '');
 		add_filter( 'TODO', array( $this, 'filter_method_name' ) );
 
 	}
@@ -197,10 +198,15 @@ class WPMUNetworkAds_Admin {
 	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
 	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
 	 *
-	 * @since    0.0.2
+	 * @since    0.0.5
 	 */
-	public function action_method_name() {
-		// TODO: Define your action hook callback here
+	public function save_wpmu_network_ads_snippet() {
+	       $snippet_code = $_POST['snippet-code'];
+	       // i should save this somewhere
+	       update_site_option('wpmu_network_snippet', $snippet_code)
+	       wp_redirect(
+	           add_query_arg(
+		           array( 'page' => $this->plugin_slug, 'updated' => 'true' ),(is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' )));
 	}
 
 	/**
