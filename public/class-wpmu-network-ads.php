@@ -76,7 +76,7 @@ class WPMUNetworkAds {
 		/* Define custom functionality.
 		 * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( 'wp_foot', array( $this, 'custom_wp_foot' ) );
+		add_action( 'wp_footer', array( $this, 'custom_wp_foot' ) );
 		add_filter( 'TODO', array( $this, 'filter_method_name' ) );
 
 	}
