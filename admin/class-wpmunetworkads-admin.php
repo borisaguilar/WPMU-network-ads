@@ -204,9 +204,11 @@ class WPMUNetworkAds_Admin {
 	       $snippet_code = $_POST['snippet-code'];
 	       // i should save this somewhere
 	       update_site_option('wpmu_network_snippet', $snippet_code)
+	       $url = (is_multisite()? network_admin_url('admin.php'): admin_url('admin.php'))
 	       wp_redirect(
 	           add_query_arg(
-		           array( 'page' => $this->plugin_slug, 'updated' => 'true' ),(is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' )));
+		           array( 'page' => $this->plugin_slug, 'updated' => 'true' ),
+			   $url));
 	}
 
 	/**
