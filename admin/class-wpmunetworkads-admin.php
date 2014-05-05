@@ -116,6 +116,38 @@ class WPMUNetworkAds_Admin {
 	}
 
 	/**
+	* Admin Init&Load needed stuff
+	*
+	* @since     0.0.8
+	*
+	* @return    null
+	*/
+	public function init() {
+	       // Add the section to reading settings so we can add our
+	       // fields to it
+	       add_settings_section(
+			'eg_setting_section',
+			'Example settings section in reading',
+			'eg_setting_section_callback_function',
+			'settings'
+		);
+ 	
+	 	// Add the field with the names and function to use for our new
+ 		// settings, put it in our new section
+		add_settings_field(
+			'eg_setting_name',
+			'Example setting Name',
+			'eg_setting_callback_function',
+			'settings',
+			'eg_setting_section'
+		);
+ 	
+		// Register our setting so that $_POST handling is done for us and
+		// our callback function just has to echo the <input>
+		register_setting( 'settings', 'eg_setting_name' );
+	}
+
+	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
 	 * @since     0.0.2
@@ -156,7 +188,8 @@ class WPMUNetworkAds_Admin {
 		 * - Change 'manage_options' to the capability you see fit
 		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
-		$this->plugin_screen_hook_suffix = add_options_page(
+		$this->plugin_screen_hook_suffix = add_submenu_page(
+			'settings.php',
 			__( 'Ads Settings', $this->plugin_slug ),
 			__( 'Network Ads Settings', $this->plugin_slug ),
 			'manage_options',
