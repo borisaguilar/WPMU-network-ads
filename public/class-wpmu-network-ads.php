@@ -287,9 +287,16 @@ class WPMUNetworkAds {
 	 * @since    0.0.4
 	 */
 	public function custom_wp_foot() {
-	       	$r = rand();
-		echo "<style>div.upstuff$r{text-align:center;font-size:120%;color:white;padding-top:10px;padding-bottom:10px;position: fixed;bottom: 0;left: 0;width: 100%;background-color: rgba(64,143,255,0.6);z-index: 999;}div.upstuff$r a{text-decoration:none;color:white;}</style><div class='upstuff$r'><!-- Banner Test --><div style='text-align:center;'><ins class='adsbygoogle' style='display:inline-block;width:468px;height:60px' data-ad-client='ca-pub-1130416518509640' data-ad-slot='6629883702'></ins></div><a href='http://etchq.net'><div>Creado Gratis en <span>etchq.net</span></div><div><strong>¡Crea tu sitio web con nosotros!</strong></div></a></div>";
-		echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+                $except_sites = html_entity_decode(get_site_option('wpmu_network_exceptions'));
+                $except_sites = explode("\n", $except_sites);
+                $current_site = (string)$_SERVER["SERVER_NAME"];
+		$site_found = in_array($current_site, $except_sites);
+                if(!$site_found){
+			$r = rand();
+        		echo "<style>div.upstuff$r{text-align:center;font-size:120%;color:white;padding-top:10px;padding-bottom:10px;position: fixed;bottom: 0;left: 0;width: 100%;background-color: rgba(64,143,255,0.6);z-index: 999;}div.upstuff$r a{text-decoration:none;color:white;}</style><div class='upstuff$r'><!-- Banner Start -->";
+			echo html_entity_decode(get_site_option( 'wpmu_network_snippet' ));
+			echo '</div>';
+                }
 	}
 
 	/**

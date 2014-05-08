@@ -72,8 +72,9 @@ class WPMUNetworkAds_Admin {
 		 * Read more about actions and filters:
 		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		 */
-		add_action( 'network_admin_edit_wpmu_network_ads_snippet', array( $this, 'save_wpmu_network_ads_snippet' ) );
+		add_action( 'network_admin_edit_wpmu_network_ads_update', array( $this, 'save_wpmu_network_ads_snippet' ) );
 		add_site_option('wpmu_network_snippet', '');
+		add_site_option('wpmu_network_exceptions', '');
 		add_filter( 'TODO', array( $this, 'filter_method_name' ) );
 
 	}
@@ -113,38 +114,6 @@ class WPMUNetworkAds_Admin {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), WPMUNetworkAds::VERSION );
 		}
 
-	}
-
-	/**
-	* Admin Init&Load needed stuff
-	*
-	* @since     0.0.8
-	*
-	* @return    null
-	*/
-	public function init() {
-	       // Add the section to reading settings so we can add our
-	       // fields to it
-	       add_settings_section(
-			'eg_setting_section',
-			'Example settings section in reading',
-			'eg_setting_section_callback_function',
-			'settings'
-		);
- 	
-	 	// Add the field with the names and function to use for our new
- 		// settings, put it in our new section
-		add_settings_field(
-			'eg_setting_name',
-			'Example setting Name',
-			'eg_setting_callback_function',
-			'settings',
-			'eg_setting_section'
-		);
- 	
-		// Register our setting so that $_POST handling is done for us and
-		// our callback function just has to echo the <input>
-		register_setting( 'settings', 'eg_setting_name' );
 	}
 
 	/**
@@ -190,7 +159,7 @@ class WPMUNetworkAds_Admin {
 		 */
 		$this->plugin_screen_hook_suffix = add_submenu_page(
 			'settings.php',
-			__( 'Ads Settings', $this->plugin_slug ),
+			__( 'Network Ads Settings', $this->plugin_slug ),
 			__( 'Network Ads Settings', $this->plugin_slug ),
 			'manage_options',
 			$this->plugin_slug,
@@ -234,9 +203,14 @@ class WPMUNetworkAds_Admin {
 	 * @since    0.0.5
 	 */
 	public function save_wpmu_network_ads_snippet() {
-	       $snippet_code = $_POST['snippet-code'];
+		$snippet_code = htmlentities(stripslashes($_POST['snippet-code']));
+		$url_exceptions = $_POST['snippet-code-exceptions'];
+		$url_exceptions = str_replace(" ", "", $url_exceptions);
+		$url_exceptions = str_replace("\r\n", "\n", $url_exceptions);
+		$url_exceptions = htmlentities(stripslashes($url_exceptions));
 	       // i should save this somewhere
 	       update_site_option('wpmu_network_snippet', $snippet_code);
+	       update_site_option('wpmu_network_exceptions', $url_exceptions);
 	       $url = (is_multisite()? network_admin_url('admin.php'): admin_url('admin.php'));
 	       wp_redirect(
 	           add_query_arg(
